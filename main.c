@@ -14,8 +14,9 @@ int main()
 
     scanf("%d %d %d",&a,&b,&c);
 
-    int discriminant = func(a,b,c);
+    
     if (a!=0){
+        int discriminant = func(a,b,c);
         if(discriminant>0){
         float X1,X2;
         X1 = (-b + sqrt(discriminant))/2*a;
