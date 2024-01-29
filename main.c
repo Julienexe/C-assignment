@@ -36,7 +36,7 @@ int main()
     }
     else {
             printf("Enter a number for a");
-            scanf("%d",&a);
+            
     }
 
 
