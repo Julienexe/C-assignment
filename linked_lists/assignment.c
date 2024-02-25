@@ -36,9 +36,7 @@ void append(struct Node **head, int num){
         *head = newNode;
         return;
        }
-    else{
-        struct Node *lastNode = *head;
-    }
+    struct Node *lastNode = *head;
     
     while (lastNode ->next == NULL){
         lastNode = lastNode -> next
