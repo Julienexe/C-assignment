@@ -32,8 +32,10 @@ void printList(struct Node *head){
 void append(struct Node **head, int num){
     struct Node *newNode = createNode(num);
     
-    if (*head == NULL)
+    if (*head == NULL){ 
         *head = newNode;
+        return;
+       }
     else{
         struct Node *lastNode = *head;
     }
@@ -49,12 +51,8 @@ void append(struct Node **head, int num){
 void prepend(struct Node **head, int num){
     struct *newNode = createNode(num);
 
-    if (*head == NULL)
-        *head = newNode;
-    else{
-        newNode -> next = *head;
-        *head = newNode;
-    } 
+    newNode -> next = *head;
+    *head = newNode;
 };
 
 void deleteByKey(struct Node **head, int key);
