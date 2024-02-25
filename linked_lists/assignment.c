@@ -56,9 +56,49 @@ void prepend(struct Node **head, int num){
 };
 
 void deleteByKey(struct Node **head, int key);
+
 void deleteByValue(struct Node **head, int value);
-void insertAfterKey(struct Node **head, int key, int value);
-void insertAfterValue(struct Node **head, int searchValue, int newValue);
+
+void insertAfterKey(struct Node **head, int key, int value){
+    \\create new node
+    struct Node *newNode = createNode(value);
+    
+    \\get the current node that the key 
+    \\points at
+    struct Node *current = *head;
+    for (int i =1; i <= key; i++){
+        if (current->next !=NULL){
+            current = current->next;
+        }
+        else{
+            printf("Invalid position");
+        }
+    }
+    \\set new node as next node for the 
+    \\current node and set current's former 
+    \\next as new node next
+    newNode -> next = current->next;
+    current -> next = newNode;
+};
+
+void insertAfterValue(struct Node **head, int searchValue, int newValue){
+    \\create a newNode
+    struct Node *newNode = createNode(newValue);
+
+    \\get node with same value as search  
+    \\value
+    struct Node *currentNode = *head;
+    while (currentNode != NULL){
+        if (currentNode->number != searchValue){
+            currentNode = currentNode->next;
+        }
+        else{
+            \\set new node as next node
+            newNode->next= currentNode->next;
+            currentNode->next = newNode;
+        }
+    }
+};
 
 int main()
 {
