@@ -164,6 +164,36 @@ int main()
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
+        switch (choice){
+            case 1:
+                printList(head);
+                break;
+
+            case 2:
+                printf("Enter data to append: ");
+                scanf("%d", &data);
+                append(&head, data);
+                break;
+
+            case 3:
+                printf("Enter data to prepend: ");
+            scanf("%d", &data);
+            prepend(&head, data);
+            break;
+
+            case 4:
+                int deleteChoice, key;
+                printf("Enter 1 to delete a position in the list and 0 to delete a value on the list");
+                scanf("%d", &deleteChoice);
+                if (deleteChoice == 1){
+                    printf("Enter position:");
+                    scanf("%d", &key);
+                    deleteByKey(&head,key);
+                    break;
+                }
+            case 5:
+        }
+
         if (choice == 1)
         {
             printList(head);
