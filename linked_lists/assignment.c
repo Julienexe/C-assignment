@@ -191,25 +191,19 @@ int main()
                     deleteByKey(&head,key);
                     break;
                 }
+                    printf("Enter list value:");
+                    scanf("%d", &key);
+                    deleteByValue(&head,key);
+                    break;
+
             case 5:
+                break;
+            default:
+                printf("Invalid choice, try again");
+                break;
         }
 
-        if (choice == 1)
-        {
-            printList(head);
-            break;
-        }
-        else if (choice == 2)
-        {
-            printf("Enter data to append: ");
-            scanf("%d", &data);
-            append(&head, data);
-            break;
-        }
-        else
-        {
-            printf("Invalid choice. Please try again.\n");
-        }
+        break;
     }
 
     return 0;
