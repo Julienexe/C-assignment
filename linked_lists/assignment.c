@@ -55,9 +55,59 @@ void prepend(struct Node **head, int num){
     *head = newNode;
 };
 
-void deleteByKey(struct Node **head, int key);
+void deleteByKey(struct Node **head, int key){   
+    \\check if list is empty
+    if (*head == NULL) {
+        printf("Linked list is already empty.\n");
+        return;
+    }
+    \\find node at specified position 
+    struct Node* temp = *head;
+    struct Node* prev = NULL;
+    if (position == 1) {
+        *head = temp->next;
+        free(temp);
+        return;
+    }
 
-void deleteByValue(struct Node **head, int value);
+    for (int i = 1; temp != NULL && i < position; i++) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("Invalid position.\n");
+        return;
+    }
+    \\assign the previous node a next value       \\before deletion 
+    prev->next = temp->next;
+    free(temp);
+};
+
+void deleteByValue(struct Node **head, int value){
+    \\check if list is empty
+    if (*head == NULL) {
+        printf("Linked list is already empty.\n");
+        return;
+    }
+
+    \\find node with Value and previous     \\node
+    struct Node *temp = * head;
+    struct Node *prev = NULL;
+    while (temp != NULL){
+        if (temp->number != value){
+            prev = temp;
+            temp = temp->next;
+        }
+        else{
+            \\set a next node for prev then 
+            \\ delete 
+            prev->next= temp->next;
+            free(temp);
+        }
+    }
+    
+};
 
 void insertAfterKey(struct Node **head, int key, int value){
     \\create new node
