@@ -29,8 +29,34 @@ void printList(struct Node *head){
     };
 };
 
-void append(struct Node **head, int num);
-void prepend(struct Node **head, int num);
+void append(struct Node **head, int num){
+    struct Node *newNode = createNode(num);
+    
+    if (*head == NULL)
+        *head = newNode;
+    else{
+        struct Node *lastNode = *head;
+    }
+    
+    while (lastNode ->next == NULL){
+        lastNode = lastNode -> next
+    } 
+    
+    lastNode->next = newNode;
+        
+};
+
+void prepend(struct Node **head, int num){
+    struct *newNode = createNode(num);
+
+    if (*head == NULL)
+        *head = newNode;
+    else{
+        newNode -> next = *head;
+        *head = newNode;
+    } 
+};
+
 void deleteByKey(struct Node **head, int key);
 void deleteByValue(struct Node **head, int value);
 void insertAfterKey(struct Node **head, int key, int value);
