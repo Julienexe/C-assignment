@@ -10,42 +10,44 @@ struct Node
 // Function prototypes
 struct Node *createNode(int num){
     //creating a new node
-    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node)); 
-    
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+
     if (!newNode) {
         printf("Memory error");
         exit(1);
     }
     newNode->number=num;
     newNode->next=NULL;
-    
+
     return newNode;
 };
 
 void printList(struct Node *head){
+    int i = 0;
     while (head != NULL){
-        printf("%d\n", head->number);
+        printf("Node %d : %d\n",i, head->number);
         head=head->next;
+        i++;
     };
 };
 
 void append(struct Node **head, int num){
     struct Node *newNode = createNode(num);
-    
-    if (*head == NULL){ 
+
+    if (*head == NULL){
         *head = newNode;
         return;
        }
-    
+
         struct Node *lastNode = *head;
-    
-    
-    while (lastNode->next == NULL){
+
+
+    while (lastNode->next != NULL){
         lastNode = lastNode -> next;
-    } 
-    
+    }
+
     lastNode->next = newNode;
-        
+
 }
 
 void prepend(struct Node **head, int num){
@@ -55,13 +57,13 @@ void prepend(struct Node **head, int num){
     *head = newNode;
 }
 
-void deleteByKey(struct Node **head, int key){   
+void deleteByKey(struct Node **head, int key){
     // check if list is empty
     if (*head == NULL) {
         printf("Linked list is already empty.\n");
         return;
     }
-    //find node at specified position 
+    //find node at specified position
     struct Node* temp = *head;
     struct Node* prev = NULL;
     while (temp != NULL && temp->number!=key) {
@@ -80,7 +82,7 @@ void deleteByKey(struct Node **head, int key){
         prev->next=temp->next;
     }
     free(temp);
-    //assign the previous node a next value       //before deletion 
+    //assign the previous node a next value       //before deletion
 }
 
 void deleteByValue(struct Node **head, int value){
@@ -99,42 +101,43 @@ void deleteByValue(struct Node **head, int value){
             temp = temp->next;
         }
         else{
-            // set a next node for prev then 
-            // delete 
+            // set a next node for prev then
+            // delete
             prev->next= temp->next;
             free(temp);
         }
     }
-    
+
 };
 
 void insertAfterKey(struct Node **head, int key, int value){
     //create new node
     struct Node *newNode = createNode(value);
-    
-    // get the current node that the key 
+
+    // get the current node that the key
     // points at
     struct Node *current = *head;
-    for (int i =1; i <= key; i++){
+    for (int i = 0; i <= key; i++){
         if (current->next !=NULL){
             current = current->next;
         }
         else{
-            printf("Invalid position");
+        printf("Invalid position");
         }
+
     }
-    //set new node as next node for the 
-    //current node and set current's former 
-    //next as new node next
     newNode -> next = current->next;
     current -> next = newNode;
+    //set new node as next node for the
+    //current node and set current's former
+    //next as new node next
 };
 
 void insertAfterValue(struct Node **head, int searchValue, int newValue){
     //create a newNode
     struct Node *newNode = createNode(newValue);
 
-    //get node with same value as search  
+    //get node with same value as search
     //value
     struct Node *currentNode = *head;
     while (currentNode != NULL){
@@ -152,11 +155,11 @@ void insertAfterValue(struct Node **head, int searchValue, int newValue){
 int main()
 {
     struct Node *head = NULL;
-    int choice, data;
+    int choice, data, newValue;
 
     while (1)
     {
-        printf("Linked Lists\n");
+        printf("\nLinked Lists\n");
         printf("1. Print List\n");
         printf("2. Append\n");
         printf("3. Prepend\n");
