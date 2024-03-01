@@ -29,12 +29,124 @@ void printList(struct Node *head){
     };
 };
 
-void append(struct Node **head, int num);
-void prepend(struct Node **head, int num);
-void deleteByKey(struct Node **head, int key);
-void deleteByValue(struct Node **head, int value);
-void insertAfterKey(struct Node **head, int key, int value);
-void insertAfterValue(struct Node **head, int searchValue, int newValue);
+void append(struct Node **head, int num){
+    struct Node *newNode = createNode(num);
+    
+    if (*head == NULL){ 
+        *head = newNode;
+        return;
+       }
+    struct Node *lastNode = *head;
+    
+    while (lastNode ->next == NULL){
+        lastNode = lastNode -> next
+    } 
+    
+    lastNode->next = newNode;
+        
+};
+
+void prepend(struct Node **head, int num){
+    struct *newNode = createNode(num);
+
+    newNode -> next = *head;
+    *head = newNode;
+};
+
+void deleteByKey(struct Node **head, int key){   
+    \\check if list is empty
+    if (*head == NULL) {
+        printf("Linked list is already empty.\n");
+        return;
+    }
+    \\find node at specified position 
+    struct Node* temp = *head;
+    struct Node* prev = NULL;
+    if (position == 1) {
+        *head = temp->next;
+        free(temp);
+        return;
+    }
+
+    for (int i = 1; temp != NULL && i < position; i++) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("Invalid position.\n");
+        return;
+    }
+    \\assign the previous node a next value       \\before deletion 
+    prev->next = temp->next;
+    free(temp);
+};
+
+void deleteByValue(struct Node **head, int value){
+    \\check if list is empty
+    if (*head == NULL) {
+        printf("Linked list is already empty.\n");
+        return;
+    }
+
+    \\find node with Value and previous     \\node
+    struct Node *temp = * head;
+    struct Node *prev = NULL;
+    while (temp != NULL){
+        if (temp->number != value){
+            prev = temp;
+            temp = temp->next;
+        }
+        else{
+            \\set a next node for prev then 
+            \\ delete 
+            prev->next= temp->next;
+            free(temp);
+        }
+    }
+    
+};
+
+void insertAfterKey(struct Node **head, int key, int value){
+    \\create new node
+    struct Node *newNode = createNode(value);
+    
+    \\get the current node that the key 
+    \\points at
+    struct Node *current = *head;
+    for (int i =1; i <= key; i++){
+        if (current->next !=NULL){
+            current = current->next;
+        }
+        else{
+            printf("Invalid position");
+        }
+    }
+    \\set new node as next node for the 
+    \\current node and set current's former 
+    \\next as new node next
+    newNode -> next = current->next;
+    current -> next = newNode;
+};
+
+void insertAfterValue(struct Node **head, int searchValue, int newValue){
+    \\create a newNode
+    struct Node *newNode = createNode(newValue);
+
+    \\get node with same value as search  
+    \\value
+    struct Node *currentNode = *head;
+    while (currentNode != NULL){
+        if (currentNode->number != searchValue){
+            currentNode = currentNode->next;
+        }
+        else{
+            \\set new node as next node
+            newNode->next= currentNode->next;
+            currentNode->next = newNode;
+        }
+    }
+};
 
 int main()
 {
@@ -52,22 +164,46 @@ int main()
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
-        if (choice == 1)
-        {
-            printList(head);
-            break;
-        }
-        else if (choice == 2)
-        {
-            printf("Enter data to append: ");
+        switch (choice){
+            case 1:
+                printList(head);
+                break;
+
+            case 2:
+                printf("Enter data to append: ");
+                scanf("%d", &data);
+                append(&head, data);
+                break;
+
+            case 3:
+                printf("Enter data to prepend: ");
             scanf("%d", &data);
-            append(&head, data);
+            prepend(&head, data);
             break;
+
+            case 4:
+                int deleteChoice, key;
+                printf("Enter 1 to delete a position in the list and 0 to delete a value on the list");
+                scanf("%d", &deleteChoice);
+                if (deleteChoice == 1){
+                    printf("Enter position:");
+                    scanf("%d", &key);
+                    deleteByKey(&head,key);
+                    break;
+                }
+                    printf("Enter list value:");
+                    scanf("%d", &key);
+                    deleteByValue(&head,key);
+                    break;
+
+            case 5:
+                break;
+            default:
+                printf("Invalid choice, try again");
+                break;
         }
-        else
-        {
-            printf("Invalid choice. Please try again.\n");
-        }
+
+        break;
     }
 
     return 0;
